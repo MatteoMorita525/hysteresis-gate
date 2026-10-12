@@ -1,6 +1,6 @@
 {
   "name": "hysteresis-gate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Triggers on state changes using distinct on and off limits.",
   "type": "module",
   "main": "src/index.js",
