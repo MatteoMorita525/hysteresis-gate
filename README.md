@@ -31,3 +31,10 @@ Sensor data and noisy signals oscillate around a decision boundary. A plain `val
 - **Collapsed band (`onLimit === offLimit`)** degenerates into a plain threshold where equality triggers transitions in both directions.
 - **Inverted band (`offLimit > onLimit`)** is a misconfiguration; the gate remains deterministic (every sample forces a decision toward whichever limit applies) but is not useful. No error is thrown, because limits are often derived from noisy data and a throwing utility is harder to compose.
 - Only finite numbers are accepted as limits and inputs; `NaN`, `Infinity`, and non-numbers throw `TypeError`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
